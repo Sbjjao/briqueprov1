@@ -4,8 +4,8 @@ import { useState } from "react";
 import { Field, Modal, NumberInput, Select, SubmitRow, TextArea, TextInput } from "@/components/briq/form";
 import { EmptyState, Kpi, Money, Panel, PageHeader } from "@/components/briq/primitives";
 import { supabase } from "@/integrations/supabase/client";
-import { brl, dateBR, itemFinance, num } from "@/lib/briquepro";
-import { saleByItem, useAction, useWorkspace } from "@/lib/data";
+import { brl, dateBR, num } from "@/lib/briquepro";
+import { useAction, useWorkspace } from "@/lib/data";
 
 export const Route = createFileRoute("/_authenticated/trocas")({
   head: () => ({
@@ -252,8 +252,4 @@ function TradeModal({ open, onClose }: { open: boolean; onClose: () => void }) {
       </form>
     </Modal>
   );
-}
-
-export function unusedFinanceHelper() {
-  return { itemFinance, saleByItem };
 }
