@@ -124,7 +124,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                navigate({ to: "/itens", search: { q: term } });
+                navigate({ to: "/itens", search: { q: term, novo: false } });
               }}
               className="hidden h-9 items-center gap-2 rounded-md border border-line bg-panel px-3 lg:flex"
             >
