@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedAquisicoesRouteImport } from './routes/_authenticated/aquisicoes'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedTrocasRouteImport } from './routes/_authenticated/trocas'
 import { Route as AuthenticatedVendasRouteImport } from './routes/_authenticated/vendas'
@@ -31,6 +32,11 @@ const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAquisicoesRoute = AuthenticatedAquisicoesRouteImport.update({
+  id: '/aquisicoes',
+  path: '/aquisicoes',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
@@ -61,6 +67,7 @@ const AuthenticatedItensIdRoute = AuthenticatedItensIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/aquisicoes': typeof AuthenticatedAquisicoesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/trocas': typeof AuthenticatedTrocasRoute
   '/vendas': typeof AuthenticatedVendasRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/aquisicoes': typeof AuthenticatedAquisicoesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/trocas': typeof AuthenticatedTrocasRoute
   '/vendas': typeof AuthenticatedVendasRoute
@@ -81,6 +89,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/aquisicoes': typeof AuthenticatedAquisicoesRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/trocas': typeof AuthenticatedTrocasRoute
   '/_authenticated/vendas': typeof AuthenticatedVendasRoute
@@ -92,6 +101,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/aquisicoes'
     | '/dashboard'
     | '/trocas'
     | '/vendas'
@@ -101,6 +111,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/aquisicoes'
     | '/dashboard'
     | '/trocas'
     | '/vendas'
@@ -111,6 +122,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/aquisicoes'
     | '/_authenticated/dashboard'
     | '/_authenticated/trocas'
     | '/_authenticated/vendas'
@@ -146,6 +158,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/aquisicoes': {
+      id: '/_authenticated/aquisicoes'
+      path: '/aquisicoes'
+      fullPath: '/aquisicoes'
+      preLoaderRoute: typeof AuthenticatedAquisicoesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
@@ -186,6 +205,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAquisicoesRoute: typeof AuthenticatedAquisicoesRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedTrocasRoute: typeof AuthenticatedTrocasRoute
   AuthenticatedVendasRoute: typeof AuthenticatedVendasRoute
@@ -194,6 +214,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAquisicoesRoute: AuthenticatedAquisicoesRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedTrocasRoute: AuthenticatedTrocasRoute,
   AuthenticatedVendasRoute: AuthenticatedVendasRoute,
