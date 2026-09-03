@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedVendasRouteImport } from './routes/_authenticated/vendas'
 import { Route as AuthenticatedItensIndexRouteImport } from './routes/_authenticated/itens.index'
 import { Route as AuthenticatedItensIdRouteImport } from './routes/_authenticated/itens.$id'
 
@@ -35,6 +36,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedVendasRoute = AuthenticatedVendasRouteImport.update({
+  id: '/vendas',
+  path: '/vendas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedItensIndexRoute = AuthenticatedItensIndexRouteImport.update({
   id: '/itens/',
   path: '/itens/',
@@ -50,6 +56,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/vendas': typeof AuthenticatedVendasRoute
   '/itens/$id': typeof AuthenticatedItensIdRoute
   '/itens/': typeof AuthenticatedItensIndexRoute
 }
@@ -57,6 +64,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/vendas': typeof AuthenticatedVendasRoute
   '/itens/$id': typeof AuthenticatedItensIdRoute
   '/itens': typeof AuthenticatedItensIndexRoute
 }
@@ -66,20 +74,22 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/vendas': typeof AuthenticatedVendasRoute
   '/_authenticated/itens/$id': typeof AuthenticatedItensIdRoute
   '/_authenticated/itens/': typeof AuthenticatedItensIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/itens/$id' | '/itens/'
+  fullPaths: '/' | '/auth' | '/dashboard' | '/vendas' | '/itens/$id' | '/itens/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/itens/$id' | '/itens'
+  to: '/' | '/auth' | '/dashboard' | '/vendas' | '/itens/$id' | '/itens'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/dashboard'
+    | '/_authenticated/vendas'
     | '/_authenticated/itens/$id'
     | '/_authenticated/itens/'
   fileRoutesById: FileRoutesById
@@ -120,6 +130,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/vendas': {
+      id: '/_authenticated/vendas'
+      path: '/vendas'
+      fullPath: '/vendas'
+      preLoaderRoute: typeof AuthenticatedVendasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/itens/': {
       id: '/_authenticated/itens/'
       path: '/itens'
@@ -139,12 +156,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedVendasRoute: typeof AuthenticatedVendasRoute
   AuthenticatedItensIdRoute: typeof AuthenticatedItensIdRoute
   AuthenticatedItensIndexRoute: typeof AuthenticatedItensIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedVendasRoute: AuthenticatedVendasRoute,
   AuthenticatedItensIdRoute: AuthenticatedItensIdRoute,
   AuthenticatedItensIndexRoute: AuthenticatedItensIndexRoute,
 }
