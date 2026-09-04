@@ -44,11 +44,13 @@ export function ItemFormModal({ open, onClose, contacts, item }: Props) {
       photos: form.photo ? [form.photo] : [],
       acquired_at: form.acquired_at || null,
       estimated_value: num(form.estimated_value),
+      quantity: Math.max(1, Math.round(num(form.quantity)) || 1),
       status: form.status,
       purchase_value: num(form.purchase_value),
       payment_method: form.payment_method || null,
       seller_contact_id: form.seller_contact_id || null,
     };
+
 
     if (item) {
       const { error } = await supabase.from("items").update(payload).eq("id", item.id);
