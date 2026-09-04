@@ -13,9 +13,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAquisicoesRouteImport } from './routes/_authenticated/aquisicoes'
+import { Route as AuthenticatedCalculadoraRouteImport } from './routes/_authenticated/calculadora'
 import { Route as AuthenticatedContatosRouteImport } from './routes/_authenticated/contatos'
 import { Route as AuthenticatedCustosRouteImport } from './routes/_authenticated/custos'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedRelatoriosRouteImport } from './routes/_authenticated/relatorios'
 import { Route as AuthenticatedTrocasRouteImport } from './routes/_authenticated/trocas'
 import { Route as AuthenticatedVendasRouteImport } from './routes/_authenticated/vendas'
 import { Route as AuthenticatedItensIndexRouteImport } from './routes/_authenticated/itens.index'
@@ -40,6 +42,12 @@ const AuthenticatedAquisicoesRoute = AuthenticatedAquisicoesRouteImport.update({
   path: '/aquisicoes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCalculadoraRoute =
+  AuthenticatedCalculadoraRouteImport.update({
+    id: '/calculadora',
+    path: '/calculadora',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedContatosRoute = AuthenticatedContatosRouteImport.update({
   id: '/contatos',
   path: '/contatos',
@@ -53,6 +61,11 @@ const AuthenticatedCustosRoute = AuthenticatedCustosRouteImport.update({
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRelatoriosRoute = AuthenticatedRelatoriosRouteImport.update({
+  id: '/relatorios',
+  path: '/relatorios',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedTrocasRoute = AuthenticatedTrocasRouteImport.update({
@@ -80,9 +93,11 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/aquisicoes': typeof AuthenticatedAquisicoesRoute
+  '/calculadora': typeof AuthenticatedCalculadoraRoute
   '/contatos': typeof AuthenticatedContatosRoute
   '/custos': typeof AuthenticatedCustosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/relatorios': typeof AuthenticatedRelatoriosRoute
   '/trocas': typeof AuthenticatedTrocasRoute
   '/vendas': typeof AuthenticatedVendasRoute
   '/itens/$id': typeof AuthenticatedItensIdRoute
@@ -92,9 +107,11 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/aquisicoes': typeof AuthenticatedAquisicoesRoute
+  '/calculadora': typeof AuthenticatedCalculadoraRoute
   '/contatos': typeof AuthenticatedContatosRoute
   '/custos': typeof AuthenticatedCustosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/relatorios': typeof AuthenticatedRelatoriosRoute
   '/trocas': typeof AuthenticatedTrocasRoute
   '/vendas': typeof AuthenticatedVendasRoute
   '/itens/$id': typeof AuthenticatedItensIdRoute
@@ -106,9 +123,11 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/aquisicoes': typeof AuthenticatedAquisicoesRoute
+  '/_authenticated/calculadora': typeof AuthenticatedCalculadoraRoute
   '/_authenticated/contatos': typeof AuthenticatedContatosRoute
   '/_authenticated/custos': typeof AuthenticatedCustosRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/relatorios': typeof AuthenticatedRelatoriosRoute
   '/_authenticated/trocas': typeof AuthenticatedTrocasRoute
   '/_authenticated/vendas': typeof AuthenticatedVendasRoute
   '/_authenticated/itens/$id': typeof AuthenticatedItensIdRoute
@@ -120,9 +139,11 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/aquisicoes'
+    | '/calculadora'
     | '/contatos'
     | '/custos'
     | '/dashboard'
+    | '/relatorios'
     | '/trocas'
     | '/vendas'
     | '/itens/$id'
@@ -132,9 +153,11 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/aquisicoes'
+    | '/calculadora'
     | '/contatos'
     | '/custos'
     | '/dashboard'
+    | '/relatorios'
     | '/trocas'
     | '/vendas'
     | '/itens/$id'
@@ -145,9 +168,11 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/aquisicoes'
+    | '/_authenticated/calculadora'
     | '/_authenticated/contatos'
     | '/_authenticated/custos'
     | '/_authenticated/dashboard'
+    | '/_authenticated/relatorios'
     | '/_authenticated/trocas'
     | '/_authenticated/vendas'
     | '/_authenticated/itens/$id'
@@ -190,6 +215,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAquisicoesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/calculadora': {
+      id: '/_authenticated/calculadora'
+      path: '/calculadora'
+      fullPath: '/calculadora'
+      preLoaderRoute: typeof AuthenticatedCalculadoraRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/contatos': {
       id: '/_authenticated/contatos'
       path: '/contatos'
@@ -209,6 +241,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/relatorios': {
+      id: '/_authenticated/relatorios'
+      path: '/relatorios'
+      fullPath: '/relatorios'
+      preLoaderRoute: typeof AuthenticatedRelatoriosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/trocas': {
@@ -244,9 +283,11 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAquisicoesRoute: typeof AuthenticatedAquisicoesRoute
+  AuthenticatedCalculadoraRoute: typeof AuthenticatedCalculadoraRoute
   AuthenticatedContatosRoute: typeof AuthenticatedContatosRoute
   AuthenticatedCustosRoute: typeof AuthenticatedCustosRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedRelatoriosRoute: typeof AuthenticatedRelatoriosRoute
   AuthenticatedTrocasRoute: typeof AuthenticatedTrocasRoute
   AuthenticatedVendasRoute: typeof AuthenticatedVendasRoute
   AuthenticatedItensIdRoute: typeof AuthenticatedItensIdRoute
@@ -255,9 +296,11 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAquisicoesRoute: AuthenticatedAquisicoesRoute,
+  AuthenticatedCalculadoraRoute: AuthenticatedCalculadoraRoute,
   AuthenticatedContatosRoute: AuthenticatedContatosRoute,
   AuthenticatedCustosRoute: AuthenticatedCustosRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedRelatoriosRoute: AuthenticatedRelatoriosRoute,
   AuthenticatedTrocasRoute: AuthenticatedTrocasRoute,
   AuthenticatedVendasRoute: AuthenticatedVendasRoute,
   AuthenticatedItensIdRoute: AuthenticatedItensIdRoute,
