@@ -155,6 +155,7 @@ export type Database = {
           payment_method: string | null
           photos: string[]
           purchase_value: number
+          quantity: number
           seller_contact_id: string | null
           serial: string | null
           status: Database["public"]["Enums"]["item_status"]
@@ -177,6 +178,7 @@ export type Database = {
           payment_method?: string | null
           photos?: string[]
           purchase_value?: number
+          quantity?: number
           seller_contact_id?: string | null
           serial?: string | null
           status?: Database["public"]["Enums"]["item_status"]
@@ -199,6 +201,7 @@ export type Database = {
           payment_method?: string | null
           photos?: string[]
           purchase_value?: number
+          quantity?: number
           seller_contact_id?: string | null
           serial?: string | null
           status?: Database["public"]["Enums"]["item_status"]

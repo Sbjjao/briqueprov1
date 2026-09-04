@@ -86,6 +86,8 @@ export interface Overview {
   salesCount: number;
   tradesCount: number;
   activeCount: number;
+  activeUnits: number;
+  unitsByStatus: Record<string, number>;
 }
 
 export function buildOverview(ws: Workspace): Overview {
@@ -96,15 +98,20 @@ export function buildOverview(ws: Workspace): Overview {
   let accumulatedProfit = 0;
   let biggestProfit = 0;
   let biggestLoss = 0;
+  let activeUnits = 0;
   const counts: Record<string, number> = {};
+  const unitsByStatus: Record<string, number> = {};
 
   for (const item of ws.items) {
+    const qty = Math.max(1, num(item.quantity) || 1);
     counts[item.status] = (counts[item.status] ?? 0) + 1;
+    unitsByStatus[item.status] = (unitsByStatus[item.status] ?? 0) + qty;
     const finance = itemFinance(item, ws.costs, sales.get(item.id));
     if (ACTIVE_STATUS.includes(item.status)) {
-      stockValue += num(item.estimated_value);
-      invested += finance.totalCost;
-      potentialProfit += finance.potentialProfit;
+      activeUnits += qty;
+      stockValue += num(item.estimated_value) * qty;
+      invested += finance.totalCost * qty;
+      potentialProfit += finance.potentialProfit * qty;
     }
     if (finance.profit !== null) {
       accumulatedProfit += finance.profit;
@@ -112,6 +119,7 @@ export function buildOverview(ws: Workspace): Overview {
       biggestLoss = Math.min(biggestLoss, finance.profit);
     }
   }
+
 
   const tradeCash = ws.trades.reduce(
     (acc, t) => acc + num(t.cash_received) - num(t.cash_paid),
@@ -129,6 +137,9 @@ export function buildOverview(ws: Workspace): Overview {
     salesCount: ws.sales.length,
     tradesCount: ws.trades.length,
     activeCount: ws.items.filter((i) => ACTIVE_STATUS.includes(i.status)).length,
+    activeUnits,
+    unitsByStatus,
+
   };
 }
 
