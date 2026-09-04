@@ -16,6 +16,7 @@ import { Route as AuthenticatedAquisicoesRouteImport } from './routes/_authentic
 import { Route as AuthenticatedContatosRouteImport } from './routes/_authenticated/contatos'
 import { Route as AuthenticatedCustosRouteImport } from './routes/_authenticated/custos'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedRelatoriosRouteImport } from './routes/_authenticated/relatorios'
 import { Route as AuthenticatedTrocasRouteImport } from './routes/_authenticated/trocas'
 import { Route as AuthenticatedVendasRouteImport } from './routes/_authenticated/vendas'
 import { Route as AuthenticatedItensIndexRouteImport } from './routes/_authenticated/itens.index'
@@ -55,6 +56,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedRelatoriosRoute = AuthenticatedRelatoriosRouteImport.update({
+  id: '/relatorios',
+  path: '/relatorios',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedTrocasRoute = AuthenticatedTrocasRouteImport.update({
   id: '/trocas',
   path: '/trocas',
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/contatos': typeof AuthenticatedContatosRoute
   '/custos': typeof AuthenticatedCustosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/relatorios': typeof AuthenticatedRelatoriosRoute
   '/trocas': typeof AuthenticatedTrocasRoute
   '/vendas': typeof AuthenticatedVendasRoute
   '/itens/$id': typeof AuthenticatedItensIdRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByTo {
   '/contatos': typeof AuthenticatedContatosRoute
   '/custos': typeof AuthenticatedCustosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/relatorios': typeof AuthenticatedRelatoriosRoute
   '/trocas': typeof AuthenticatedTrocasRoute
   '/vendas': typeof AuthenticatedVendasRoute
   '/itens/$id': typeof AuthenticatedItensIdRoute
@@ -109,6 +117,7 @@ export interface FileRoutesById {
   '/_authenticated/contatos': typeof AuthenticatedContatosRoute
   '/_authenticated/custos': typeof AuthenticatedCustosRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/relatorios': typeof AuthenticatedRelatoriosRoute
   '/_authenticated/trocas': typeof AuthenticatedTrocasRoute
   '/_authenticated/vendas': typeof AuthenticatedVendasRoute
   '/_authenticated/itens/$id': typeof AuthenticatedItensIdRoute
@@ -123,6 +132,7 @@ export interface FileRouteTypes {
     | '/contatos'
     | '/custos'
     | '/dashboard'
+    | '/relatorios'
     | '/trocas'
     | '/vendas'
     | '/itens/$id'
@@ -135,6 +145,7 @@ export interface FileRouteTypes {
     | '/contatos'
     | '/custos'
     | '/dashboard'
+    | '/relatorios'
     | '/trocas'
     | '/vendas'
     | '/itens/$id'
@@ -148,6 +159,7 @@ export interface FileRouteTypes {
     | '/_authenticated/contatos'
     | '/_authenticated/custos'
     | '/_authenticated/dashboard'
+    | '/_authenticated/relatorios'
     | '/_authenticated/trocas'
     | '/_authenticated/vendas'
     | '/_authenticated/itens/$id'
@@ -211,6 +223,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/relatorios': {
+      id: '/_authenticated/relatorios'
+      path: '/relatorios'
+      fullPath: '/relatorios'
+      preLoaderRoute: typeof AuthenticatedRelatoriosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/trocas': {
       id: '/_authenticated/trocas'
       path: '/trocas'
@@ -247,6 +266,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedContatosRoute: typeof AuthenticatedContatosRoute
   AuthenticatedCustosRoute: typeof AuthenticatedCustosRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedRelatoriosRoute: typeof AuthenticatedRelatoriosRoute
   AuthenticatedTrocasRoute: typeof AuthenticatedTrocasRoute
   AuthenticatedVendasRoute: typeof AuthenticatedVendasRoute
   AuthenticatedItensIdRoute: typeof AuthenticatedItensIdRoute
@@ -258,6 +278,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedContatosRoute: AuthenticatedContatosRoute,
   AuthenticatedCustosRoute: AuthenticatedCustosRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedRelatoriosRoute: AuthenticatedRelatoriosRoute,
   AuthenticatedTrocasRoute: AuthenticatedTrocasRoute,
   AuthenticatedVendasRoute: AuthenticatedVendasRoute,
   AuthenticatedItensIdRoute: AuthenticatedItensIdRoute,
