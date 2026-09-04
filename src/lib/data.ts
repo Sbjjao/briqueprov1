@@ -137,6 +137,9 @@ export function buildOverview(ws: Workspace): Overview {
     salesCount: ws.sales.length,
     tradesCount: ws.trades.length,
     activeCount: ws.items.filter((i) => ACTIVE_STATUS.includes(i.status)).length,
+    activeUnits,
+    unitsByStatus,
+
   };
 }
 
