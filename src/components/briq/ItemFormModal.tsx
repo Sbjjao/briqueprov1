@@ -121,7 +121,6 @@ export function ItemFormModal({ open, onClose, contacts, item }: Props) {
             />
           </Field>
 
-          <Field label="Data de aquisição">
           <Field label="Quantidade em estoque">
             <NumberInput
               min={1}
@@ -139,8 +138,8 @@ export function ItemFormModal({ open, onClose, contacts, item }: Props) {
           </Field>
           <Field label="Valor de compra (por unidade)">
             <NumberInput
-
               value={form.purchase_value}
+
               onChange={(e) => setForm({ ...form, purchase_value: e.target.value })}
             />
           </Field>
