@@ -50,7 +50,7 @@ function Dashboard() {
         <Kpi
           label="Patrimônio em estoque"
           value={brl(overview.stockValue)}
-          hint={`${overview.activeCount} itens ativos`}
+          hint={`${overview.activeUnits} unidades · ${overview.activeCount} cadastros`}
         />
         <Kpi
           label="Dinheiro investido"
@@ -75,13 +75,18 @@ function Dashboard() {
         {ACTIVE_STATUS.map((status) => (
           <div key={status} className="rounded-lg border border-line bg-panel p-3">
             <p className="label-mono">{STATUS_LABEL[status]}</p>
-            <p className="num mt-1 text-xl">{overview.counts[status] ?? 0}</p>
+            <p className="num mt-1 text-xl">{overview.unitsByStatus[status] ?? 0}</p>
+            <p className="num text-[10px] text-faint">
+              {overview.counts[status] ?? 0} cadastros
+            </p>
           </div>
         ))}
         <div className="rounded-lg border border-line bg-panel p-3">
           <p className="label-mono">Vendidos</p>
-          <p className="num mt-1 text-xl text-accent">{overview.counts["vendido"] ?? 0}</p>
+          <p className="num mt-1 text-xl text-accent">{overview.unitsByStatus["vendido"] ?? 0}</p>
+          <p className="num text-[10px] text-faint">{overview.counts["vendido"] ?? 0} cadastros</p>
         </div>
+
       </section>
 
       <div className="grid gap-3 xl:grid-cols-3">
@@ -117,7 +122,12 @@ function Dashboard() {
                       className="grid grid-cols-12 items-center px-4 py-3 hover:bg-panel2"
                     >
                       <div className="col-span-4 min-w-0">
-                        <p className="truncate text-[13px] font-medium">{item.name}</p>
+                        <p className="truncate text-[13px] font-medium">
+                          {item.name}
+                          <span className="num ml-2 rounded border border-line px-1.5 py-0.5 text-[10px] text-faint">
+                            {Math.max(1, num(item.quantity) || 1)} un.
+                          </span>
+                        </p>
                         <p className="num truncate text-[10px] text-faint">
                           {CATEGORY_LABEL[item.category]}
                           {item.serial ? ` · ${item.serial}` : ""}

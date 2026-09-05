@@ -68,7 +68,7 @@ function ItemsPage() {
     <>
       <PageHeader
         title="Itens / produtos"
-        subtitle={`${rows.length} de ${data.items.length} itens`}
+        subtitle={`${rows.length} de ${data.items.length} cadastros · ${rows.reduce((a, i) => a + Math.max(1, num(i.quantity) || 1), 0)} unidades`}
         actions={
           <button
             onClick={() => navigate({ to: "/itens", search: { q, novo: true } })}
@@ -129,13 +129,19 @@ function ItemsPage() {
                     className="grid grid-cols-12 items-center px-4 py-3 hover:bg-panel2"
                   >
                     <div className="col-span-4 min-w-0">
-                      <p className="truncate text-[13px] font-medium">{item.name}</p>
+                      <p className="truncate text-[13px] font-medium">
+                        {item.name}
+                        <span className="num ml-2 rounded border border-line px-1.5 py-0.5 text-[10px] text-faint">
+                          {Math.max(1, num(item.quantity) || 1)} un.
+                        </span>
+                      </p>
                       <p className="num truncate text-[10px] text-faint">
                         {CATEGORY_LABEL[item.category]}
                         {item.brand ? ` · ${item.brand}` : ""}
                         {item.serial ? ` · ${item.serial}` : ""}
                       </p>
                     </div>
+
                     <div className="col-span-2">
                       <StatusBadge status={item.status} />
                     </div>
