@@ -75,13 +75,18 @@ function Dashboard() {
         {ACTIVE_STATUS.map((status) => (
           <div key={status} className="rounded-lg border border-line bg-panel p-3">
             <p className="label-mono">{STATUS_LABEL[status]}</p>
-            <p className="num mt-1 text-xl">{overview.counts[status] ?? 0}</p>
+            <p className="num mt-1 text-xl">{overview.unitsByStatus[status] ?? 0}</p>
+            <p className="num text-[10px] text-faint">
+              {overview.counts[status] ?? 0} cadastros
+            </p>
           </div>
         ))}
         <div className="rounded-lg border border-line bg-panel p-3">
           <p className="label-mono">Vendidos</p>
-          <p className="num mt-1 text-xl text-accent">{overview.counts["vendido"] ?? 0}</p>
+          <p className="num mt-1 text-xl text-accent">{overview.unitsByStatus["vendido"] ?? 0}</p>
+          <p className="num text-[10px] text-faint">{overview.counts["vendido"] ?? 0} cadastros</p>
         </div>
+
       </section>
 
       <div className="grid gap-3 xl:grid-cols-3">
