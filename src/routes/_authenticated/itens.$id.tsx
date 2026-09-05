@@ -68,7 +68,12 @@ function ItemDetail() {
           <Link to="/itens" search={{ q: "", novo: false }} className="num text-[10px] text-faint">
             ← itens
           </Link>
-          <h1 className="mt-1 text-lg font-semibold tracking-tight">{item.name}</h1>
+          <h1 className="mt-1 text-lg font-semibold tracking-tight">
+            {item.name}
+            <span className="num ml-2 rounded border border-line px-1.5 py-0.5 text-[11px] text-faint">
+              {Math.max(1, num(item.quantity) || 1)} un. em estoque
+            </span>
+          </h1>
           <p className="num text-[10px] text-faint">
             {CATEGORY_LABEL[item.category]}
             {item.brand ? ` · ${item.brand}` : ""}
