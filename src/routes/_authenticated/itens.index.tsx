@@ -68,7 +68,7 @@ function ItemsPage() {
     <>
       <PageHeader
         title="Itens / produtos"
-        subtitle={`${rows.length} de ${data.items.length} itens`}
+        subtitle={`${rows.length} de ${data.items.length} cadastros · ${rows.reduce((a, i) => a + Math.max(1, num(i.quantity) || 1), 0)} unidades`}
         actions={
           <button
             onClick={() => navigate({ to: "/itens", search: { q, novo: true } })}

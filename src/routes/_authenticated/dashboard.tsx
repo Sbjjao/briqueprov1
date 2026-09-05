@@ -50,7 +50,7 @@ function Dashboard() {
         <Kpi
           label="Patrimônio em estoque"
           value={brl(overview.stockValue)}
-          hint={`${overview.activeCount} itens ativos`}
+          hint={`${overview.activeUnits} unidades · ${overview.activeCount} cadastros`}
         />
         <Kpi
           label="Dinheiro investido"
