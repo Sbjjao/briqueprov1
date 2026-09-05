@@ -64,9 +64,9 @@ export function ItemFormModal({ open, onClose, contacts, item }: Props) {
       await supabase.from("item_events").insert({
         item_id: data.id,
         kind: "compra",
-        title: "Compra registrada",
+        title: `Compra registrada (${payload.quantity} un.)`,
         detail: form.payment_method ? `Pagamento: ${form.payment_method}` : null,
-        amount: num(form.purchase_value),
+        amount: num(form.purchase_value) * payload.quantity,
       });
     }
   }, item ? "Item atualizado" : "Item cadastrado", onClose);
