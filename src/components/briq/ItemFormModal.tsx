@@ -122,14 +122,24 @@ export function ItemFormModal({ open, onClose, contacts, item }: Props) {
           </Field>
 
           <Field label="Data de aquisição">
+          <Field label="Quantidade em estoque">
+            <NumberInput
+              min={1}
+              step={1}
+              value={form.quantity}
+              onChange={(e) => setForm({ ...form, quantity: e.target.value })}
+            />
+          </Field>
+          <Field label="Data de aquisição">
             <TextInput
               type="date"
               value={form.acquired_at}
               onChange={(e) => setForm({ ...form, acquired_at: e.target.value })}
             />
           </Field>
-          <Field label="Valor de compra">
+          <Field label="Valor de compra (por unidade)">
             <NumberInput
+
               value={form.purchase_value}
               onChange={(e) => setForm({ ...form, purchase_value: e.target.value })}
             />
@@ -186,7 +196,9 @@ function blank(item?: Item | null) {
     photo: item?.photos?.[0] ?? "",
     acquired_at: item?.acquired_at ?? "",
     estimated_value: String(item?.estimated_value ?? ""),
+    quantity: String(item?.quantity ?? 1),
     status: item?.status ?? ("em_estoque" as Item["status"]),
+
     purchase_value: String(item?.purchase_value ?? ""),
     payment_method: item?.payment_method ?? "",
     seller_contact_id: item?.seller_contact_id ?? "",
